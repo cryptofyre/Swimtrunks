@@ -1,0 +1,21 @@
+{
+    "discord": {
+        "token": "YOUR_BOT_TOKEN",
+        "channelId": "YOUR_CHANNEL_ID"
+    },
+    "database": {
+        "path": "/path/to/your/database.db"
+    },
+    "playlist": {
+        "path": "./playlist/default.xml"
+    },
+    "polling": {
+        "interval": 5000,
+        "batchSize": 5
+    },
+    "logging": {
+        "level": "info",
+        "timestamps": true,
+        "colors": true
+    }
+}

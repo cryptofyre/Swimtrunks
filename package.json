@@ -1,0 +1,30 @@
+{
+  "name": "swimtrunks",
+  "version": "1.0.0",
+  "description": "A simple Discord bot to report discoveries found on TrunkSDR.",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptofyre/swimtrunks.git"
+  },
+  "keywords": [
+    "sdr"
+  ],
+  "author": "cryptofyre",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/cryptofyre/swimtrunks/issues"
+  },
+  "homepage": "https://github.com/cryptofyre/swimtrunks#readme",
+  "packageManager": "pnpm@9.15.2+sha512.93e57b0126f0df74ce6bff29680394c0ba54ec47246b9cf321f0121d8d9bb03f750a705f24edc3c1180853afd7c2c3b94196d0a3d53d3e069d9e2793ef11f321",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "discord.js": "^14.17.2",
+    "sqlite3": "^5.1.7",
+    "systeminformation": "^5.24.8",
+    "xml2js": "^0.6.2"
+  }
+}
