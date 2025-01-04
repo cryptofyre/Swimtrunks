@@ -1,6 +1,5 @@
 const si = require('systeminformation');
 const os = require('node:os');
-const { exec } = require('node:child_process');
 
 async function getSystemEmbed(Discord, status = 'startup') {
     // If it's a shutdown, return simplified embed immediately

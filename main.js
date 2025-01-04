@@ -1,10 +1,11 @@
 const Discord = require('discord.js');
 const { loadTalkgroups, getTalkgroupInfo } = require('./utils/talkgroups');
-const { getDepartmentColor, getDepartmentInfo } = require('./utils/departmentColors');
+const { getDepartmentInfo } = require('./utils/departmentColors');
 const Database = require('./utils/database');
 const Logger = require('./utils/logger');
 const SystemInfo = require('./utils/systemInfo');
 const config = require('./config.json');
+const TextProcessor = require('./utils/textProcessor');
 
 const logger = new Logger(config.logging);
 const client = new Discord.Client({
@@ -56,11 +57,11 @@ async function processNewCalls() {
                 const deptInfo = getDepartmentInfo(talkgroupInfo.group, talkgroupInfo.name);
                 
                 const timeFormats = formatDateTime(call.unixtime);
-                const duration = parseFloat(call.duration) || 0;
+                const duration = Number.parseFloat(call.duration) || 0;
                 const durationStr = `${duration.toFixed(1)}s`;
                 
-                const formattedTranscription = transcription ? `> ${transcription}` : '*No transcription available*';
-
+                const formattedTranscription = TextProcessor.formatTranscription(transcription);
+                
                 const title = `${deptInfo.emoji} ${talkgroupInfo.group}`;
                 const subtitle = `📻 ${talkgroupInfo.name}`;
                 
@@ -124,7 +125,8 @@ client.once('ready', async () => {
         setInterval(processNewCalls, config.polling.interval);
         logger.info('Processor', `Started call processing (${config.polling.interval}ms interval)`);
     } catch (error) {
-        logger.error('Startup', `Failed to send startup information: ${error.message}`);
+        logger.error('Startup', `Failed during startup routines: ${error.message}`);
+        process.exit(1);
     }
 });
 
@@ -142,7 +144,7 @@ async function handleShutdown() {
             process.exit(0);
         }, 500); // Give Discord API 500ms to send the message
     } catch (error) {
-        logger.error('Shutdown', 'Emergency shutdown initiated');
+        logger.error('Shutdown', `Emergency shutdown initiated, closing database: ${error.message}`);
         db.close();
         process.exit(1);
     }

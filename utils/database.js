@@ -34,7 +34,7 @@ class Database {
                 }
 
                 if (row && !('processed' in row)) {
-                    this.db.run(`ALTER TABLE recordings ADD COLUMN processed INTEGER DEFAULT 0`, (err) => {
+                    this.db.run('ALTER TABLE recordings ADD COLUMN processed INTEGER DEFAULT 0', (err) => {
                         if (err) {
                             reject(err);
                             return;
