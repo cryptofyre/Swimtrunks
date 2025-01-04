@@ -17,7 +17,7 @@ const censorPatterns = [
     { pattern: /\b(?:dl|license|lic|id)(?:\s*number)?[\s:#]?\d+\b/gi, replacement: '[ID NUMBER]' },
 ];
 
-const disclaimer = "\n\n-#*Transcription provided by local AI processing - Accuracy may vary*";
+const disclaimer = "\n\n-# *Transcription provided by local AI processing - Accuracy may vary*";
 
 function processSensitiveInfo(text) {
     let processed = text;
