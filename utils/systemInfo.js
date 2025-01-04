@@ -76,4 +76,23 @@ async function getSystemEmbed(Discord, status = 'startup') {
     return embed;
 }
 
-module.exports = { getSystemEmbed };
+async function getSystemStats() {
+    const [cpu, mem, processes] = await Promise.all([
+        si.cpu(),
+        si.mem(),
+        si.processes()
+    ]);
+
+    const sdrProcess = processes.list.find(p => 
+        p.name.toLowerCase().includes('sdrtrunk') || 
+        p.command.toLowerCase().includes('sdrtrunk')
+    );
+
+    const memoryUsage = Math.round(mem.used / 1024 / 1024 / 1024 * 10) / 10;
+    const memoryTotal = Math.round(mem.total / 1024 / 1024 / 1024 * 10) / 10;
+    const cpuLoad = os.loadavg()[0].toFixed(2);
+
+    return `📊 System Stats | CPU: ${cpuLoad}% | RAM: ${memoryUsage}/${memoryTotal}GB | SDRTrunk: ${sdrProcess ? '✅' : '❌'}`;
+}
+
+module.exports = { getSystemEmbed, getSystemStats };

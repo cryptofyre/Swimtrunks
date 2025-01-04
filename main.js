@@ -110,6 +110,19 @@ async function processNewCalls() {
     }
 }
 
+async function updateChannelDescription() {
+    if (!config.monitoring?.enabled || !config.monitoring?.channelDescription) return;
+
+    try {
+        const channel = await client.channels.fetch(config.discord.channelId);
+        const stats = await SystemInfo.getSystemStats();
+        await channel.setTopic(stats);
+        logger.info('Monitoring', 'Updated channel description with system stats');
+    } catch (error) {
+        logger.error('Monitoring', `Failed to update channel description: ${error.message}`);
+    }
+}
+
 client.once('ready', async () => {
     try {
         logger.success('Discord', 'Swimtrunks is ready!');
@@ -124,6 +137,12 @@ client.once('ready', async () => {
         
         setInterval(processNewCalls, config.polling.interval);
         logger.info('Processor', `Started call processing (${config.polling.interval}ms interval)`);
+
+        if (config.monitoring?.enabled) {
+            setInterval(updateChannelDescription, config.monitoring.updateInterval);
+            await updateChannelDescription(); // Initial update
+            logger.info('Monitoring', `Started system monitoring (${config.monitoring.updateInterval}ms interval)`);
+        }
     } catch (error) {
         logger.error('Startup', `Failed during startup routines: ${error.message}`);
         process.exit(1);

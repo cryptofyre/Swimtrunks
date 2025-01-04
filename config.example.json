@@ -17,5 +17,10 @@
         "level": "info",
         "timestamps": true,
         "colors": true
+    },
+    "monitoring": {
+        "enabled": false,
+        "updateInterval": 60000,
+        "channelDescription": true
     }
 }
