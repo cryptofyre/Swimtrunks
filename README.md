@@ -5,13 +5,14 @@ A Discord bot that monitors SDRTrunk recordings and transcriptions, providing re
 ## 🌟 Features
 
 - Real-time monitoring of SDRTrunk recordings
+- Efficient private detail censoring
 - Automatic transcription posting
 - Department color coding and categorization
+- Department-based emoji indicators
 - System status monitoring
 - Detailed logging system
 - Graceful startup and shutdown handling
 - SQLite database integration
-- Department-based emoji indicators
 
 ## 📋 Prerequisites
 
