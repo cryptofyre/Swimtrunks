@@ -1,25 +1,25 @@
 const departmentTypes = {
     // Law Enforcement
     POLICE: {
-        keywords: ['PD', 'Police', 'Sheriff', 'SO', 'Law', 'Enforcement', 'MCSO', 'Constb'],
+        keywords: ['PD', 'Police', 'Sheriff', 'SO', 'Law', 'Enforcement', 'MCSO', 'Constb', 'TSTC Police', 'Baylor PD'],
         color: '#0037ff', // Blue
         emoji: '👮'
     },
     // Fire Department
     FIRE: {
-        keywords: ['FD', 'Fire', 'WFD', 'Still Cl'],
+        keywords: ['FD', 'Fire', 'WFD', 'Still Cl', 'Tone'],
         color: '#ff0000', // Red
         emoji: '🚒'
     },
     // Emergency Management
     EMERGENCY: {
-        keywords: ['Emer', 'EOC', 'Emergency'],
+        keywords: ['Emer', 'EOC', 'Emergency', 'T-Control'],
         color: '#ff7700', // Orange
         emoji: '🚨'
     },
     // Public Works
     PUBLIC_WORKS: {
-        keywords: ['PW', 'Public Works', 'Streets', 'Util', 'Park', 'Fleet', 'Traffic'],
+        keywords: ['PW', 'Public Works', 'Streets', 'Util', 'Park', 'Fleet', 'Traffic', 'Garbg', 'Garb', 'Roads', 'Streets', 'Sewer', 'Water', 'Meter'],
         color: '#2db82d', // Green
         emoji: '🔧'
     },
@@ -37,14 +37,14 @@ const departmentTypes = {
     },
     // Airport Operations
     AIRPORT: {
-        keywords: ['Airprt'],
+        keywords: ['Airprt', 'Airport'],
         color: '#00ccff', // Light Blue
         emoji: '✈️'
     }
 };
 
-function getDepartmentInfo(departmentName) {
-    const normalizedDept = departmentName.toUpperCase();
+function getDepartmentInfo(departmentName, talkgroupName = '') {
+    const normalizedDept = `${departmentName} ${talkgroupName}`.toUpperCase();
     
     for (const [key, type] of Object.entries(departmentTypes)) {
         if (type.keywords.some(keyword => 

@@ -53,7 +53,7 @@ async function processNewCalls() {
                 const channel = await client.channels.fetch(config.discord.channelId);
                 const talkgroupInfo = getTalkgroupInfo(call.talkgroup_id);
                 const transcription = JSON.parse(call.transcription).text;
-                const deptInfo = getDepartmentInfo(talkgroupInfo.group);
+                const deptInfo = getDepartmentInfo(talkgroupInfo.group, talkgroupInfo.name);
                 
                 const timeFormats = formatDateTime(call.unixtime);
                 const duration = parseFloat(call.duration) || 0;
