@@ -7,7 +7,7 @@ const departmentTypes = {
     },
     // Fire Department
     FIRE: {
-        keywords: ['FD', 'Fire', 'WFD', 'Still Cl', 'Tone'],
+        keywords: ['FD', 'Fire', 'WFD', 'Still Cl', 'Tone', ' FD ', 'Disp FD', 'FD Disp', ' Fire ', 'Fire Dept'],
         color: '#ff0000', // Red
         emoji: '🚒'
     },
@@ -46,9 +46,26 @@ const departmentTypes = {
 function getDepartmentInfo(departmentName, talkgroupName = '') {
     const normalizedDept = `${departmentName} ${talkgroupName}`.toUpperCase();
     
+    // First, check for exact matches
     for (const [key, type] of Object.entries(departmentTypes)) {
         if (type.keywords.some(keyword => 
             normalizedDept.includes(keyword.toUpperCase()))) {
+            return {
+                color: type.color,
+                emoji: type.emoji,
+                type: key
+            };
+        }
+    }
+    
+    // Secondary check: Split into words and check each word against keywords
+    const words = normalizedDept.split(/\s+/);
+    for (const [key, type] of Object.entries(departmentTypes)) {
+        if (words.some(word => 
+            type.keywords.some(keyword => 
+                word === keyword.toUpperCase() || 
+                keyword.toUpperCase().split(/\s+/).includes(word)
+            ))) {
             return {
                 color: type.color,
                 emoji: type.emoji,

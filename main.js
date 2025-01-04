@@ -62,7 +62,7 @@ async function processNewCalls() {
                 
                 const formattedTranscription = TextProcessor.formatTranscription(transcription);
                 
-                const title = `${deptInfo.emoji} ${talkgroupInfo.group}`;
+                const title = `📞 Incoming call from ${deptInfo.emoji} ${talkgroupInfo.group}`;
                 const subtitle = `📻 ${talkgroupInfo.name}`;
                 
                 const embed = new Discord.EmbedBuilder()

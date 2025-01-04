@@ -60,7 +60,7 @@ async function getSystemEmbed(Discord, status = 'startup') {
                 value: sdrProcess ? 
                     `Running (PID: ${sdrProcess.pid})` : 
                     'Not detected',
-                inline: true
+                inline: false
             },
             {
                 name: '🎙️ Transcriber',
