@@ -1,0 +1,13 @@
+[Unit]
+Description=Swimtrunks Bot Service
+After=network.target sdrtrunk.service sdrTrunkTranscriber.service
+
+[Service]
+Type=simple
+User=your-user # Replace with your user
+WorkingDir=/home/your-user/path/to/app
+ExecStart=/usr/bin/node /path/to/your/main.js # Path to Swimtrunks
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
